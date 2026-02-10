@@ -51,9 +51,14 @@ def main():
         
         # Parse remaining Hydra args from sys.argv
         for arg in sys.argv[1:]:
-            if not arg.startswith("--") or arg in ["--sanity_check", "--main", "--pilot"]:
+            # Skip our mode flags
+            if arg in ["--sanity_check", "--main", "--pilot"]:
                 continue
-            overrides.append(arg.replace("--", ""))
+            # Include Hydra-style overrides (key=value) and other arguments
+            if "=" in arg:
+                overrides.append(arg)
+            elif arg.startswith("--"):
+                overrides.append(arg.replace("--", ""))
         
         # Add mode overrides
         if mode == "sanity_check":
