@@ -1,0 +1,37 @@
+defaults:
+  - _self_
+
+# WandB configuration
+wandb:
+  entity: airas
+  project: "2026-02-10"
+  mode: online  # will be overridden to "disabled" in sanity_check mode
+
+# Results directory
+results_dir: ./results
+
+# Mode flags (overridden by command line)
+mode:
+  sanity_check: false
+  main: false
+  pilot: false
+
+# Hydra configuration
+hydra:
+  run:
+    dir: ${results_dir}/${run.run_id}
+  output_subdir: null
+  job_logging:
+    version: 1
+    formatters:
+      simple:
+        format: '[%(levelname)s] - %(message)s'
+    handlers:
+      console:
+        class: logging.StreamHandler
+        formatter: simple
+        stream: ext://sys.stdout
+    root:
+      level: INFO
+      handlers: [console]
+    disable_existing_loggers: false

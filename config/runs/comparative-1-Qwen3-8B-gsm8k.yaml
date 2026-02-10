@@ -1,0 +1,32 @@
+run_id: comparative-1-Qwen3-8B-gsm8k
+
+method:
+  name: IG-RZeroCoT
+  type: comparative
+  description: "Natural-language Invariant-Gated Reflective Zero-shot CoT - self-reported invariant violations without executable checks"
+
+model:
+  name: Qwen3-8B
+  hf_model_id: Qwen/Qwen2.5-8B-Instruct
+  dtype: bfloat16
+  device_map: auto
+  max_new_tokens_solve: 256
+  max_new_tokens_verify: 512
+  temperature: 0.0
+  top_p: 1.0
+  do_sample: false
+
+dataset:
+  name: gsm8k
+  split: test
+  subset: 200
+  cache_dir: .cache
+
+training:
+  num_examples: 200
+  seed: 42
+  log_every: 10
+
+optuna:
+  enabled: false
+  n_trials: 0
