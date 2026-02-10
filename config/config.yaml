@@ -19,7 +19,7 @@ mode:
 # Hydra configuration
 hydra:
   run:
-    dir: ${results_dir}/${run.run_id}
+    dir: ${results_dir}
   output_subdir: null
   job_logging:
     version: 1
